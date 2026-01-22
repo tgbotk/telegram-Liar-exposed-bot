@@ -7,9 +7,9 @@ from pyrogram.errors import MessageNotModified
 from pyrogram.types import CallbackQuery, InputMediaPhoto
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup
 
-bot_token = "5116615962:AAFf8Qo6hglhS3iXfNTs5Qy5TCwz4Gynv1E"
-api_id = 24985337
-api_hash = "6b835cc9023283e151b6ae37d3966ca9"
+bot_token = ""
+api_id = 
+api_hash = ""
 host = "localhost"
 user = "pianzi"
 password = "pianzi"
@@ -62,7 +62,7 @@ app = Client(
 
 adminid = -1002472144705
 baoguang = -1002472144705
-pindao = "v666"
+pindao = "sosbot"
 # 媒体组列表，包含多个媒体对象
 media_ids = []
 # 初始化一个标志，表示用户是否上传完所有图片
@@ -74,7 +74,7 @@ user_states = {}
 @app.on_message(filters.command("start") & filters.private)
 async def start_command(client, message):
     user_id = message.from_user.id
-    caidan = ReplyKeyboardMarkup([["🆘曝光骗子", "🔍查询骗子"], ["🤝劳务之家"]], resize_keyboard=True)
+    caidan = ReplyKeyboardMarkup([["🆘曝光骗子", "🔍查询骗子"], ["🤝无能的开发者"]], resize_keyboard=True)
     sql = chaxun(f'select * from user where telegramid = "{user_id}" limit 1;')
     if not sql:
         now = datetime.now()
@@ -126,29 +126,14 @@ async def zhuanshu(client, message):
 2️⃣发送骗子名称 or 骗子用户名</b>""", quote=False, disable_web_page_preview=True, reply_markup=keyboard)
 
 
-@app.on_message(filters.text & filters.regex("🤝劳务之家"))
+@app.on_message(filters.text & filters.regex("🤝无能的开发者"))
 async def zhuanshu(client, message):
     keyboard = InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton("🤝劳务之家", url=f"https://t.me/laowuzj")]
+            [InlineKeyboardButton("🤝无能的开发者", url=f"https://t.me/sosbot")]
         ]
     )
-    await message.reply_text("""<b>担保联系劳务之家 @laowuzj</b>""", quote=False, disable_web_page_preview=True, reply_markup=keyboard)
-
-
-@app.on_message(filters.text & filters.regex("💰付费广告"))
-async def zhuanshu(client, message):
-    keyboard = InlineKeyboardMarkup(
-        [
-            [InlineKeyboardButton("🤝江山供需频道", url=f"https://t.me/v000")]
-        ]
-    )
-    await message.reply_text("""<b>发布付费广告严格要求如下
-1️⃣禁止携带其他担保平台标识
-2️⃣禁止发布虚假内容广告
-3️⃣发布广告者禁止诈骗欺骗用户
-如有违反条约永久🈲发布广告</b>""", quote=False, disable_web_page_preview=True, reply_markup=keyboard)
-
+    await message.reply_text("""<b>担保联系无能的开发者 @sosbot</b>""", quote=False, disable_web_page_preview=True, reply_markup=keyboard)
 
 
 
@@ -176,10 +161,10 @@ async def set_qunzu_message_text(client, message):
             result_list.append(combined_item)
 
         n1 = '\n'
-        text = f"📢公告:劳务之家技术支持\n\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n{n1.join(result_list)}\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n<b>搜索关键词<code>【{text}】</code> | 共找到<code>{zts}</code>条搜索结果 | 当前为<code>{page_number}</code>页</b>"
+        text = f"📢公告:无能的开发者技术支持\n\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n{n1.join(result_list)}\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n<b>搜索关键词<code>【{text}】</code> | 共找到<code>{zts}</code>条搜索结果 | 当前为<code>{page_number}</code>页</b>"
         keyboard = InlineKeyboardMarkup(
             [
-                [InlineKeyboardButton("劳务之家", url="https://t.me/laowuzj"),
+                [InlineKeyboardButton("无能的开发者", url="https://t.me/sosbot"),
                  InlineKeyboardButton("下一页", callback_data=f"xiaye")]
             ]
         )
@@ -219,10 +204,10 @@ async def set_qunzu_message_text(client, message):
                 result_list.append(combined_item)
 
             n1 = '\n'
-            text = f"📢公告:劳务之家技术支持\n\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n{n1.join(result_list)}\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n<b>搜索关键词<code>【{text}】</code> | 共找到<code>{zts}</code>条搜索结果 | 当前为<code>{page_number}</code>页</b>"
+            text = f"📢公告:无能的开发者技术支持\n\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n{n1.join(result_list)}\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n<b>搜索关键词<code>【{text}】</code> | 共找到<code>{zts}</code>条搜索结果 | 当前为<code>{page_number}</code>页</b>"
             keyboard = InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton("劳务之家", url="https://t.me/laowuzj"),
+                    [InlineKeyboardButton("无能的开发者", url="https://t.me/sosbot"),
                      InlineKeyboardButton("下一页", callback_data=f"xiaye")]
                 ]
             )
@@ -297,10 +282,10 @@ async def set_welcome_message_text(client, message):
                 result_list.append(combined_item)
 
             n1 = '\n'
-            text = f"📢公告:劳务之家技术支持\n\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n{n1.join(result_list)}\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n<b>搜索关键词<code>【{text}】</code> | 共找到<code>{zts}</code>条搜索结果 | 当前为<code>{page_number}</code>页</b>"
+            text = f"📢公告:无能的开发者技术支持\n\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n{n1.join(result_list)}\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n<b>搜索关键词<code>【{text}】</code> | 共找到<code>{zts}</code>条搜索结果 | 当前为<code>{page_number}</code>页</b>"
             keyboard = InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton("劳务之家", url="https://t.me/laowuzj"),
+                    [InlineKeyboardButton("无能的开发者", url="https://t.me/sosbot"),
                      InlineKeyboardButton("下一页", callback_data=f"xiaye")]
                 ]
             )
@@ -344,10 +329,10 @@ async def set_welcome_message_text(client, message):
                     result_list.append(combined_item)
 
                 n1 = '\n'
-                text = f"📢公告:劳务之家技术支持\n\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n{n1.join(result_list)}\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n<b>搜索关键词<code>【{text}】</code> | 共找到<code>{zts}</code>条搜索结果 | 当前为<code>{page_number}</code>页</b>"
+                text = f"📢公告:无能的开发者技术支持\n\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n{n1.join(result_list)}\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n<b>搜索关键词<code>【{text}】</code> | 共找到<code>{zts}</code>条搜索结果 | 当前为<code>{page_number}</code>页</b>"
                 keyboard = InlineKeyboardMarkup(
                     [
-                        [InlineKeyboardButton("劳务之家", url="https://t.me/laowuzj"),
+                        [InlineKeyboardButton("无能的开发者", url="https://t.me/sosbot"),
                          InlineKeyboardButton("下一页", callback_data=f"xiaye")]
                     ]
                 )
@@ -382,7 +367,7 @@ async def xiayee(client, update: CallbackQuery):
             result_list.append(combined_item)
 
         n1 = '\n'
-        text = f"📢公告:劳务之家技术支持\n\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n{n1.join(result_list)}\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n<b>搜索关键词<code>【{textt}】</code> | 共找到<code>{zts}</code>条搜索结果 | 当前为<code>{page_number}</code>页</b>"
+        text = f"📢公告:无能的开发者技术支持\n\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n{n1.join(result_list)}\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n<b>搜索关键词<code>【{textt}】</code> | 共找到<code>{zts}</code>条搜索结果 | 当前为<code>{page_number}</code>页</b>"
         keyboard = ""
         if page_number >= 1:
             keyboard = InlineKeyboardMarkup(
@@ -394,7 +379,7 @@ async def xiayee(client, update: CallbackQuery):
         elif page_number <= 1:
             keyboard = InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton("劳务之家", url="https://t.me/laowuzj"),
+                    [InlineKeyboardButton("无能的开发者", url="https://t.me/sosbot"),
                      InlineKeyboardButton("下一页", callback_data=f"xiaye")]
                 ]
             )
@@ -431,13 +416,13 @@ async def shangye(client, update: CallbackQuery):
                 result_list.append(combined_item)
 
             n1 = '\n'
-            text = f"📢公告:劳务之家技术支持\n\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n{n1.join(result_list)}\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n<b>搜索关键词<code>【{textt}】</code> | 共找到<code>{zts}</code>条搜索结果 | 当前为<code>{page_number}</code>页</b>"
+            text = f"📢公告:无能的开发者技术支持\n\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n{n1.join(result_list)}\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n<b>搜索关键词<code>【{textt}】</code> | 共找到<code>{zts}</code>条搜索结果 | 当前为<code>{page_number}</code>页</b>"
             keyboard = ""
             if page_number <= 1:
 
                 keyboard = InlineKeyboardMarkup(
                     [
-                        [InlineKeyboardButton("劳务之家", url="https://t.me/laowuzj"),
+                        [InlineKeyboardButton("无能的开发者", url="https://t.me/sosbot"),
                          InlineKeyboardButton("下一页", callback_data=f"xiaye")]
                     ]
                 )
@@ -515,8 +500,8 @@ async def tongguoshenheg(client, update: CallbackQuery):
     wenzi = f"名字:{name}\n身份信息:{shenfen}\n手机号:{shouji}"
     keyboard = InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton("我要曝光", url="https://t.me/js8888_bot"),
-             InlineKeyboardButton("官方频道", url="https://t.me/XiY888")]
+            [InlineKeyboardButton("我要曝光", url="https://t.me/sosbot"),
+             InlineKeyboardButton("官方频道", url="https://t.me/sosbot")]
         ]
     )
 
@@ -532,3 +517,4 @@ async def jujueshenhe(client, update: CallbackQuery):
     await update.message.edit_text(f"审核拒绝")
 
 app.run()
+
