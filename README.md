@@ -35,10 +35,10 @@
 pip install pymysql pyrogram tgcrypto
 
 
-3. 配置数据库 (MySQL)
+### 3. 配置数据库 (MySQL)
 你需要创建一个名为 pianzi 的数据库（或者根据代码修改数据库名）。 然后导入项目提供的数据库文件 pianzi_20251105_132324.sql.gz 即可。
 
-4. 修改配置文件
+### 4. 修改配置文件
 打开 Python 主文件（例如 bot.py），找到以下配置区域并填入你自己的信息：
 
 Python
@@ -61,7 +61,7 @@ pindao = "v666" # 证据图片所在的频道索引（用于拼接链接）
 Bash
 python3 bot.py
 
-📖 使用指南
+### 📖 使用指南
 对于普通用户
 /start: 启动机器人，查看主菜单。
 
