@@ -43,15 +43,14 @@ pip install pymysql pyrogram tgcrypto
 ### 4. 修改配置文件
 打开 Python 主文件（例如 bot.py），找到以下配置区域并填入你自己的信息：
 
-Python
 # Telegram API 配置
 bot_token = "你的_BOT_TOKEN"
-api_id = 12345678  # 你的 API ID
+api_id = 12345678   # 你的 API ID
 api_hash = "你的_API_HASH"
 
 # 数据库配置
 host = "localhost"
-user = "root"      # 数据库用户名
+user = "root"       # 数据库用户名
 password = "password" # 数据库密码
 database = "pianzi" # 数据库名称
 
@@ -59,9 +58,6 @@ database = "pianzi" # 数据库名称
 adminid = -100xxxxxxxxx # 接收审核消息的群组/频道ID
 baoguang = -100xxxxxxxxx # (可选) 审核通过后发送到的公开频道ID
 pindao = "v666" # 证据图片所在的频道索引（用于拼接链接）
-5. 运行机器人
-Bash
-python3 bot.py
 
 ### 📖 使用指南
 对于普通用户
