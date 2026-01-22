@@ -45,45 +45,7 @@ pip install pymysql pyrogram tgcrypto
 (注：tgcrypto 是 Pyrogram 的推荐依赖，能提升性能)
 
 3. 配置数据库 (MySQL)
-你需要创建一个名为 pianzi 的数据库（或者根据代码修改数据库名），并导入以下表结构。
-
-登录你的 MySQL 并执行以下 SQL 语句：
-
-SQL
-CREATE DATABASE IF NOT EXISTS pianzi DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
-USE pianzi;
-
--- 用户表
-CREATE TABLE IF NOT EXISTS user (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    telegramid BIGINT NOT NULL,
-    time DATETIME,
-    upload_complete VARCHAR(20) DEFAULT 'False'
-);
-
--- 曝光记录表
-CREATE TABLE IF NOT EXISTS baoguangs (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    telegramid BIGINT,
-    msid INT, -- 消息ID
-    qunzuid INT, -- 审核群消息ID
-    name VARCHAR(255),
-    shenfen VARCHAR(255),
-    shouji VARCHAR(255),
-    yuanyin TEXT,
-    text TEXT, -- 用于全文搜索的备用字段
-    zhengju TEXT, -- 证据链接或ID
-    shenhe VARCHAR(50) DEFAULT '待审核'
-);
-
--- 搜索记录/分页缓存表
-CREATE TABLE IF NOT EXISTS sousuo (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    text VARCHAR(255),
-    xxid INT, -- 消息ID
-    yeshu INT DEFAULT 1 -- 当前页码
-);
+你需要创建一个名为 pianzi 的数据库（或者根据代码修改数据库名） 导入 pianzi_20251105_132324.sql.gz 数据库即可
 4. 修改配置文件
 打开 Python 主文件（例如 bot.py），找到以下配置区域并填入你自己的信息：
 
