@@ -31,8 +31,86 @@
 ### 2. 安装依赖库
 请确保安装了以下 Python 库：
 
-```bash
+bash
+
 pip install pymysql pyrogram tgcrypto
 
 
+
+### 3. 配置数据库 (MySQL)
+你需要创建一个名为 pianzi 的数据库（或者根据代码修改数据库名）。 然后导入项目提供的数据库文件 pianzi_20251105_132324.sql.gz 即可。
+
+### 4. 修改配置文件
+打开 Python 主文件（例如 bot.py），找到以下配置区域并填入你自己的信息：
+
+Python
+# Telegram API 配置
+bot_token = "你的_BOT_TOKEN"
+api_id = 12345678  # 你的 API ID
+api_hash = "你的_API_HASH"
+
+# 数据库配置
+host = "localhost"
+user = "root"      # 数据库用户名
+password = "password" # 数据库密码
+database = "pianzi" # 数据库名称
+
+# 管理员与频道配置
+adminid = -100xxxxxxxxx # 接收审核消息的群组/频道ID
+baoguang = -100xxxxxxxxx # (可选) 审核通过后发送到的公开频道ID
+pindao = "v666" # 证据图片所在的频道索引（用于拼接链接）
+5. 运行机器人
+Bash
+python3 bot.py
+
+### 📖 使用指南
+对于普通用户
+/start: 启动机器人，查看主菜单。
+
+曝光骗子: 点击菜单按钮，同意规则后，必须按照以下严格格式发送文本：
+
+Plaintext
+名字：XXX
+身份信息：@xxx
+手机号：138xxxx
+原因：被骗经过描述...
+查询骗子:
+
+私聊: 直接发送关键词（名字、手机号或TG账号）。
+
+群组: 发送 查询 关键词（例如：查询 @骗子ID）。
+
+对于管理员
+机器人会将用户的曝光申请转发到配置的 adminid 群组。
+
+点击 “通过”：该记录状态变更为“审核通过”，用户可查询到。
+
+点击 “拒绝”：该记录被标记拒绝，不予展示。
+
+⚠️ 注意事项与安全建议
+敏感信息: 代码中包含了数据库密码和 Bot Token。在生产环境中，强烈建议使用环境变量（Environment Variables）或单独的配置文件（如 .env）来管理这些敏感信息，不要直接硬编码在代码里。
+
+SQL 注入: 原代码使用了 f-string 拼接 SQL 语句 (f'select ...')，这存在 SQL 注入风险。建议后续优化为参数化查询（Parameterized Queries）。
+
+正则匹配: 曝光功能的正则匹配比较严格，用户必须严格遵守 名字：、身份信息： 等前缀，否则无法识别。
+
+🤝 贡献与支持
+技术支持：K
+
+联系方式：Telegram @sosbot
+
+📝 TODO / 待优化列表
+[ ] 将数据库连接改为连接池 (Connection Pool) 以提高并发性能。
+
+[ ] 修复 SQL 注入漏洞，使用 cursor.execute(sql, (param1, param2)) 格式。
+
+[ ] 优化正则表达式，使其对用户输入格式更宽容。
+
+[ ] 完善图片/媒体证据的上传逻辑。
+
+[ ] 将配置项分离至 .env 文件。
+
+License
+
+### MIT
 
