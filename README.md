@@ -1,2 +1,154 @@
-# telegram-Liar-exposed-bot
-Telegram 骗子曝光机器人
+# 🕵️‍♂️ Telegram 骗子曝光与查询机器人
+这是一个基于 Python (Pyrogram) 和 MySQL 开发的 Telegram 机器人。旨在提供一个社区驱动的骗子曝光平台，用户可以提交骗子信息，管理员审核后入库，其他人可以通过机器人或群组查询骗子记录。
+
+✨ 功能特性
+🔍 骗子查询：
+
+支持私聊查询和群组内指令查询。
+
+支持模糊搜索（姓名、身份ID、手机号）。
+
+查询结果支持分页显示（上一页/下一页）。
+
+🆘 曝光举报：
+
+用户按照指定格式提交骗子信息。
+
+系统自动查重（检测身份信息是否已存在）。
+
+👮‍♂️ 管理员审核：
+
+用户提交的曝光信息会发送至管理员频道/群组。
+
+管理员可通过按钮进行“通过”或“拒绝”操作。
+
+📊 数据统计：记录用户搜索历史和基本用户信息。
+
+📢 广告与导航：集成外部频道链接和广告位展示。
+
+🛠️ 环境要求
+Python 3.7+
+
+MySQL 5.7+ / 8.0+
+
+Telegram Bot Token & API ID
+
+🚀 安装与部署
+1. 克隆或下载代码
+将项目代码下载到你的服务器或本地环境。
+
+2. 安装依赖库
+请确保安装了以下 Python 库：
+
+Bash
+pip install pymysql pyrogram tgcrypto
+(注：tgcrypto 是 Pyrogram 的推荐依赖，能提升性能)
+
+3. 配置数据库 (MySQL)
+你需要创建一个名为 pianzi 的数据库（或者根据代码修改数据库名），并导入以下表结构。
+
+登录你的 MySQL 并执行以下 SQL 语句：
+
+SQL
+CREATE DATABASE IF NOT EXISTS pianzi DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+USE pianzi;
+
+-- 用户表
+CREATE TABLE IF NOT EXISTS user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    telegramid BIGINT NOT NULL,
+    time DATETIME,
+    upload_complete VARCHAR(20) DEFAULT 'False'
+);
+
+-- 曝光记录表
+CREATE TABLE IF NOT EXISTS baoguangs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    telegramid BIGINT,
+    msid INT, -- 消息ID
+    qunzuid INT, -- 审核群消息ID
+    name VARCHAR(255),
+    shenfen VARCHAR(255),
+    shouji VARCHAR(255),
+    yuanyin TEXT,
+    text TEXT, -- 用于全文搜索的备用字段
+    zhengju TEXT, -- 证据链接或ID
+    shenhe VARCHAR(50) DEFAULT '待审核'
+);
+
+-- 搜索记录/分页缓存表
+CREATE TABLE IF NOT EXISTS sousuo (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    text VARCHAR(255),
+    xxid INT, -- 消息ID
+    yeshu INT DEFAULT 1 -- 当前页码
+);
+4. 修改配置文件
+打开 Python 主文件（例如 bot.py），找到以下配置区域并填入你自己的信息：
+
+Python
+# Telegram API 配置
+bot_token = "你的_BOT_TOKEN"
+api_id = 12345678  # 你的 API ID
+api_hash = "你的_API_HASH"
+
+# 数据库配置
+host = "localhost"
+user = "root"      # 数据库用户名
+password = "password" # 数据库密码
+database = "pianzi" # 数据库名称
+
+# 管理员与频道配置
+adminid = -100xxxxxxxxx # 接收审核消息的群组/频道ID
+baoguang = -100xxxxxxxxx # (可选) 审核通过后发送到的公开频道ID
+pindao = "v666" # 证据图片所在的频道索引（用于拼接链接）
+5. 运行机器人
+Bash
+python3 bot.py
+📖 使用指南
+对于普通用户
+/start: 启动机器人，查看主菜单。
+
+曝光骗子: 点击菜单按钮，同意规则后，按照以下严格格式发送文本：
+
+Plaintext
+名字：XXX
+身份信息：@xxx
+手机号：138xxxx
+原因：被骗经过描述...
+查询骗子:
+
+私聊: 直接发送关键词（名字、手机号或TG账号）。
+
+群组: 发送 查询 关键词（例如：查询 @骗子ID）。
+
+对于管理员
+机器人会将用户的曝光申请转发到配置的 adminid 群组。
+
+点击 “通过”：该记录状态变更为“审核通过”，用户可查询到。
+
+点击 “拒绝”：该记录被标记拒绝，不予展示。
+
+⚠️ 注意事项与安全建议
+敏感信息: 代码中包含了数据库密码和 Bot Token。在生产环境中，强烈建议使用环境变量（Environment Variables）或单独的配置文件（如 .env）来管理这些敏感信息，不要直接硬编码在代码里。
+
+SQL 注入: 原代码使用了 f-string 拼接 SQL 语句 (f'select ...')，这存在 SQL 注入风险。建议后续优化为参数化查询（Parameterized Queries）。
+
+正则匹配: 曝光功能的正则匹配比较严格，用户必须严格遵守 名字：、身份信息： 等前缀，否则无法识别。
+
+🤝 贡献与支持
+技术支持：K 联系方式：Telegram @sosbot
+
+📝 TODO / 待优化列表
+[ ] 将数据库连接改为连接池 (Connection Pool) 以提高并发性能。
+
+[ ] 修复 SQL 注入漏洞，使用 cursor.execute(sql, (param1, param2)) 格式。
+
+[ ] 优化正则表达式，使其对用户输入格式更宽容。
+
+[ ] 完善图片/媒体证据的上传逻辑。
+
+[ ] 将配置项分离至 .env 文件。
+
+License: MIT
